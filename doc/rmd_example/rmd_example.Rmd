@@ -2,29 +2,37 @@
 title: 'DSCI 310: Historical Horse Population in Canada'
 author: "Tiffany Timbers & Jordan Bourak"
 output:
-  bookdown::html_document2
-  bookdown::pdf_document2
+  bookdown::html_document2:
+    toc: true
+    toc_depth: 2
+    bibliography: reference.bib
+  bookdown::pdf_document2:
+    toc: true
+    bibliography: references.bib
+bibliography: references.bib
+nocite: '@*'
+
 ---
 
-```{r}
+```{r, include= FALSE}
 library(tidyverse)
 ```
 
-Aim
+## Aim
 
 This project explores the historical population of horses in Canada between 1906 and 1972 for each province.
 
-Data
+## Data
 
-Horse population data were sourced from the [Government of Canada's Open Data website](http://open.canada.ca/en/open-data) (Government of Canada, 2017a and Government of Canada, 2017b).
+Horse population data were sourced from the [Government of Canada's Open Data website](http://open.canada.ca/en/open-data) (@horses1 and @horses2).
 
-Methods
+## Methods
 
-The R programming language (R Core Team, 2019) and the following R packages were used to perform the analysis: knitr (Xie 2014), tidyverse (Wickham 2017), and bookdown (Xie 2016). *Note: this report is adapted from (Timbers 2020).*
+The R programming language (@R) and the following R packages were used to perform the analysis: @knitr, @tidyverse, and @bookdown. *Note: this report is adapted from (@ttimbers-horses).*
 
-Results
+## Results
 
-```{r}
+```{r, echo = FALSE}
 knitr::include_graphics("../../results/horse_pops_plot.png")
 ```
 
@@ -34,10 +42,10 @@ We can see from Figure 1 that Ontario, Saskatchewan and Alberta have had the hig
 
 Suppose we were interested in looking in more closely at the province with the highest spread (in terms of standard deviation) of horse populations. We present the standard deviations here:
 
-```{r}
+```{r, fig.cap = "Standard Deviation of Horse Population", echo = FALSE}
 horses_sd_table <- read_csv("../../results/horses_sd.csv")
 largest_sd <- horses_sd_table$Province[1]
-knitr::kable(horses_sd_table)
+knitr::kable(horses_sd_table, caption = "Standard deviation of Horse Population")
 ```
 
 Note that we define standard deviation (of a sample) as
@@ -46,12 +54,12 @@ $$s = sqrt( sum_{i = 1}^n(x_i - \bar{x}) / (n-1))$$
 
 Additionally, note that in Table 1 we consider the sample standard deviation of the number of horses during the same time span as Figure1.
 
-```{r}
+```{r, fig.cap = "Largest Horse Population Plot", echo = FALSE}
 knitr::include_graphics("../../results/horse_pop_plot_largest_sd.png")
 ```
 
 Figure 2: Horse populations for the province with the largest standard deviation
 
-In Figure 2 we zoom in and look at the province of ?, which had the largest spread of values in terms of standard deviation.
+In Figure 2 we zoom in and look at the province of `r largest_sd`, which had the largest spread of values in terms of standard deviation.
 
 References
